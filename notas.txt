@@ -1,0 +1,7 @@
+hexo server
+hexo deploy
+hexo clean
+hexo generate (static)
+hexo publish 
+hexo new "Several submit actions in one form"
+Hay ejemplo en Drafts (hello world original)
