@@ -2,7 +2,7 @@
 title: Error actualizando docker (mint 18)
 date: 2018-11-12 15:58:40
 tags:
-- es
+- esp
 - linux
 - docker
 ---

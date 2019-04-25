@@ -63,4 +63,4 @@ mq-tablet = "screen and (min-width: 480px) and (max-width: 767px)"
 mq-normal = "screen and (min-width: 768px)"
 
 // jmiguel
-// code-border-radius = 3px
+code-border-radius = 3px
