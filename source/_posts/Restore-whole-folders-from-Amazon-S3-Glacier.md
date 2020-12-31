@@ -19,49 +19,31 @@ Said that: I needed to restore a full directory with a lot of directories so doi
 
 I've modified the script just a bit because it didn't work for me (maybe some parameters of aws-cli have changed).  You'll need the aws cli (Command Line Interface) to do this. 
 
-First of all, we get all *Glaciered* items on a bucket (named here MYBUCKET, substitute it with your own name):
+First of all, we get all *Glaciered* items on a bucket named here MYBUCKET, substitute it with your own name
+(please note: I've updated it to allow spaces on file or folder names):
 
 ```
-aws s3api list-objects-v2 --bucket MYBUCKET --query "Contents[?StorageClass=='GLACIER']" --output text | awk '{print $2}' > glacier-restore.txt
+aws s3api list-objects-v2 --bucket MYBUCKET --query "Contents[?StorageClass=='GLACIER']" --output text | awk '{print substr($0, index($0, $2))}' | awk '{NF-=3};3' > glacier-restore.txt
 ```
 
 This will get a list with all objects under Glacier rules on your bucket. Maybe you don't want all of them so this is the moment to edit the `glacier-restore.txt` file in case you want to fine-tune the files you want to get. 
 
-Then, create (edit + chhmod 755) the following script which takes the content of your file an do the restore:
+Then, create (edit + chmod 755) the following script which takes the content of your file an do the restore:
 
 ```
 #!/bin/sh
 
-for x in `cat glacier-restore.txt`
+cat glacier-restore.txt   | while read x
   do
     echo "Begin restoring $x"
-    aws s3api restore-object --restore-request Days=5 --bucket MYBUCKET --key "$x"
+    aws s3api restore-object --restore-request Days=25 --bucket MYBUCKET --key "$x"
     echo "Done restoring $x"
   done
-
 ```
+
 
 Remember: the process it's not inmediate. With this command you instruct AWS to restore your files, but it will take between 3 and 5 hours to complete.  You can do it faster (and more expensive) but if you need it so fast you'd maybe should consider standard storage. 
 
 
 Hope this helps!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
