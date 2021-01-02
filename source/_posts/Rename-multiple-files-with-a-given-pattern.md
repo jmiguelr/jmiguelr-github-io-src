@@ -34,7 +34,7 @@ And you want to get
 
 You can do a loop, string substitution... a mess. Or you can use the `rename` command in this way:
 
-`rename 's/file/ppillo/g' *`
+`rename 's/file/newname/g' *`
 
 
 Note than rename is a shell script made with perl, so maybe it's not available on your operating system (mint and ubuntu have it) but if you have perl you can just copy and paste de following code to create your own `rename` version.
