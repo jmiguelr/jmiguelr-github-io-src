@@ -2,7 +2,7 @@
 menu:
   Home: /
   Archives: /archives
-  jmiguel.eu: https://jmiguel.eu
+  jmiguel.eu: https://www.jmiguel.eu
 rss: /rss.xml
 
 # Content
@@ -17,6 +17,7 @@ widgets:
 - tagcloud
 - archive
 - recent_posts
+- jmiguel
 
 # display widgets at the bottom of index pages (pagination == 2)
 index_widgets:
